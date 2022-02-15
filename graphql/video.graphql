@@ -1,21 +1,21 @@
 
-type Product {
+type Video {
   id: ID!
-  name: String!
-  desc: String
-  price: String
-  category: Category
-}
+  title: String!
+  sinopsis: String
+  duration: Int
+  file: String
+  tipo: String
+  episode: Int
+  season: Int
+  imageFilm: String
 
-type Category {
-  id: ID!
-  name: String!
 }
 
 type Query {
-  product(id: ID! @eq): Product @find
-  products: [Product!]! @all
+  video(id: ID! @eq): Video @find
+  videos: [Video!]! @all
 }
 type Mutation {
-  createProduct(name: String!, desc: String!, price: String!): Product @create
+  createVideo(name: String!, desc: String!, price: String!): Video @create
 }

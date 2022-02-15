@@ -77,7 +77,7 @@ class videoController extends Controller{
         // Creem llista favoritos de la sessio iniciada 
         $favs = $request->session()->get('favorites', []);
         // Utilitzem scope per id per agafar el video en concret
-        $vid = $this->videos->byId($request->input('idVideo'))->get();
+        $vid = $this->videos->byId($request->input('id'))->get();
 
         // Si el video ja esta en favorits
         if (in_array($vid, $favs)) {
@@ -102,4 +102,29 @@ class videoController extends Controller{
         $vid = $this->videos->byId($request->id)->get();
         return  view('videos/streaming')->with('video',$vid);
     }
+    // =====================
+    //======API REST========
+    //======================
+
+
+    public function store(Request $request)
+    {
+        $vid = Video::create($request->all());
+        return response()->json($vid, 200);
+    }
+    public function update(Request $request, $id){
+        $vid = Video::find($id);
+        $vid->update($request->all());
+        return response()->json($vid, 200);
+    }
+    public function delete(Request $request, $id){
+        $vid = Video::find($id);
+        $vid->delete($request->all());
+        return response()->json($vid, 200);
+    }
+    public function genere(Request $request, $genere){
+        
+    }
+    
+
 }

@@ -3,9 +3,8 @@
 namespace App\Http\Resources;
 
 use Illuminate\Http\Resources\Json\JsonResource;
-use App\Http\Resources\GenereResource;
 
-class VideoResource extends JsonResource
+class GenereResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -15,12 +14,6 @@ class VideoResource extends JsonResource
      */
     public function toArray($request)
     {
-        return [
-            'id' => $this->id,
-            'titol' => $this->title,
-            'sinopsis' =>$this->sinopsis,
-            'tipo'=>$this->tipo,
-            'genere' => new GenereResource($this->genere)
-        ];
+        return parent::toArray($request);
     }
 }

@@ -42,7 +42,7 @@ class Video extends Model
     function scopeJoinGenere($query)
     {
         return $query
-            ->join('videos_generes', 'idVideo', '=', 'idVideoVG')
+            ->join('videos_generes', 'id', '=', 'idVideoVG')
             ->join('generes', 'idGenereVG', '=', 'idGenere')
             ->select('videos.*', 'generes.genere');
     }
@@ -53,10 +53,21 @@ class Video extends Model
     }
 
     function scopeById($query, $id) {
-        return $query->where('idVideo', $id);
+        return $query->where('id', $id);
     }
 
     function scopeByTitle($query, $title) {
         return $query->where('title', 'like' ,'%'. $title .'%');
     }
+    public function genere() {
+        return $this->hasManyThrough(
+            VideoGenere::class, 
+            Genere::class,
+            'id', // Foreign key on the environments table...
+            'idGenere', // Foreign key on the deployments table...
+            'id', // Local key on the projects table...
+            'id' // Local key on the environments table...
+    );
+    }
+
 }

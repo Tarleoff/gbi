@@ -12,7 +12,7 @@
                     
                     
                    
-                    <a href="{{ Route('playVid',['id' => $a->idVideo ])}} ">
+                    <a href="{{ Route('playVid',['id' => $a->id ])}} ">
                         <button class="banner__button">Play</button>
                     </a>
                 </div>
@@ -32,7 +32,7 @@
         @forelse($peliculas[$tipo] as $peli)
             <div class="movie-card">
                 <div class="movie-header manOfSteel">
-                    <a href="{{ Route('playVid',['id' => $peli->idVideo ])}} ">
+                    <a href="{{ Route('playVid',['id' => $peli->id ])}} ">
                         <img class="img-card" src="{{ $peli->imageFilm }}" alt="1">
                     </a>
                 </div>

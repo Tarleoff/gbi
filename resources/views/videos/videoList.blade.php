@@ -10,7 +10,7 @@
 
             <div class="movie-card">
                 <div class="movie-header manOfSteel">
-                    <a href="{{ Route('playVid',['id' => $video->idVideo ])}} ">
+                    <a href="{{ Route('playVid',['id' => $video->id ])}} ">
                         <img class="img-card" src="{{ $video->imageFilm }}" alt="1">
                     </a>
                 </div>
@@ -26,7 +26,7 @@
                         <div class="row">
                             <form action="{{ Route('addFav') }}" method="POST">
                                 @csrf
-                                <input type="hidden" name="idVideo" value="{{ $video->idVideo }}">
+                                <input type="hidden" name="idVideo" value="{{ $video->id }}">
                                 <button type="submit" class="btn btn-outline-primary" name="star">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                                         class="bi bi-star-fill" viewBox="0 0 16 16">

@@ -17,7 +17,7 @@ class CreateVideosGeneresTable extends Migration
             $table->id('idVideosGeneres');
             //$table->timestamps();
             $table->unsignedBigInteger('idVideoVG');
-            $table->foreign('idVideoVG')->references('idVideo')->on('videos');
+            $table->foreign('idVideoVG')->references('id')->on('videos');
             $table->unsignedBigInteger('idGenereVG');
             $table ->foreign('idGenereVG')->references('idGenere')->on('generes');  
         });
