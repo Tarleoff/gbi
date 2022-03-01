@@ -11,8 +11,12 @@ class Genere extends Model
     protected $table = 'generes';
 
 
-    public function videosGenere() {
-        return $this->hasMany(VideosGenere::class);
-    }
-
+   /* public function video() {
+        return $this->hasManyThrough(
+            VideosGenere::class, 
+            Video::class,
+            'idVideoVG', // Local key on the projects table...
+            'id' // Local key on the environments table...
+    );
+    }*/
 }

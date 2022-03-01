@@ -88,4 +88,23 @@ class LoginController extends Controller
         //Session::flush();
         return view('/home1');
     }
+
+    public function doLoginAPI(LoginRequest $request) {
+ 
+        $validator = Validator::make($request->all(), $request->rules());
+        if (!$validator->fails()) {
+                $userdata = [
+                    'email' => $request->input('email'),
+                    'password' => $request->input('password')
+                ];
+            if (Auth::attempt($userdata)) { // el attempt mira a la bd (?)
+                $abilities=[];
+                //if($admin) array_push($abilities,'isAdmin');
+                //if($superuser) array_push($abilities,'superuser');
+                $token = $request->user()->createToken('token',$abilities);
+                return ['token' => $token->plainTextToken];
+            }
+        }
+    }
+ 
 }

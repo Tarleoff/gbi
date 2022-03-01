@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Model\VideosGenere;
+use App\Model\Genere;
 
 class Video extends Model
 {
@@ -59,15 +60,14 @@ class Video extends Model
     function scopeByTitle($query, $title) {
         return $query->where('title', 'like' ,'%'. $title .'%');
     }
-    public function genere() {
+  /*  public function genere() {
         return $this->hasManyThrough(
-            VideoGenere::class, 
+            VideosGenere::class, 
             Genere::class,
-            'id', // Foreign key on the environments table...
             'idGenere', // Foreign key on the deployments table...
             'id', // Local key on the projects table...
-            'id' // Local key on the environments table...
     );
     }
+    */
 
 }

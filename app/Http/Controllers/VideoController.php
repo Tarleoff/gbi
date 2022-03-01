@@ -3,8 +3,9 @@
 namespace App\Http\Controllers;
 use App\Models\Video;
 use App\Models\Genere;
-
+use App\Http\Resources\VideoResource;
 use App\Http\Requests\SearchRequest;
+use App\Http\Resources\VideoCollection;
 use Illuminate\Http\Request;
 
 
@@ -122,8 +123,22 @@ class videoController extends Controller{
         $vid->delete($request->all());
         return response()->json($vid, 200);
     }
-    public function genere(Request $request, $genere){
-        
+    public function title($title){
+        $vid = Video::ByTitle($title)->get();
+        return new VideoCollection($vid);
+    }
+    public function serie(){
+        $vid = Video::bytipo('serie')->get();
+        return new VideoCollection($vid);
+    }
+    public function movie(){
+        $vid = Video::bytipo('movie')->get();
+        return new VideoCollection($vid);
+    }
+
+    public function genere($idGenere){
+        $vid = Video::joinGenere()->byGenere($idGenere);
+        return new VideoCollection($vid->get());
     }
     
 

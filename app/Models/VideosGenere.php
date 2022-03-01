@@ -14,9 +14,4 @@ class VideosGenere extends Model
         'idVideoVG',
         'idGenereVG',
     ];
-
-    public function deployments()
-    {
-    
-    }
 }
