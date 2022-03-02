@@ -14,6 +14,8 @@ class VideoCollection extends ResourceCollection
      */
     public function toArray($request)
     {
-        return ["data" => $this->collection]; 
+        return [
+            "data" => $this->collection,
+        ]; 
     }
 }

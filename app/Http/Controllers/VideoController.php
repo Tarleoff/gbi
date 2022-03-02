@@ -136,8 +136,8 @@ class videoController extends Controller{
         return new VideoCollection($vid);
     }
 
-    public function genere($idGenere){
-        $vid = Video::joinGenere()->byGenere($idGenere)->get();
+    public function genere($genere){
+        $vid = Video::joinGenere()->byGenere($genere)->get();
         return new VideoCollection($vid);
     }
     

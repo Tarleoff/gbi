@@ -98,13 +98,22 @@ class LoginController extends Controller
                     'password' => $request->input('password')
                 ];
             if (Auth::attempt($userdata)) { // el attempt mira a la bd (?)
-                $abilities=[];
+                //$abilities=[];
                 //if($admin) array_push($abilities,'isAdmin');
                 //if($superuser) array_push($abilities,'superuser');
-                $token = $request->user()->createToken('token',$abilities);
+                $token = $request->user()->createToken('token');
                 return ['token' => $token->plainTextToken];
+
             }
+            else return response()->json([
+                'status' => 'Error',
+                'msg' => 'Usuario no encontrado',
+            ]);
         }
+        return response()->json([
+            'status' => 'Error',
+            'msg' => 'Por fa introduce todos los datos',
+        ]);    
     }
  
 }

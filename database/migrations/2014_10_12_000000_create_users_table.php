@@ -26,8 +26,10 @@ class CreateUsersTable extends Migration
             $table->boolean('block')->nulleable()->default(0);
             $table->bigInteger('creditCard')->nulleable()->default(0);
             $table->integer('cvv')->nulleable()->default(0);
+            $table->boolean('is_admin')->default(true);
             $table->rememberToken();
             $table->timestamps();
+           
         });
     }
 

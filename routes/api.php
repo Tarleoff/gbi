@@ -27,36 +27,46 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 // ======== VIDEOS ========
 
-//Visualitzar tots els videos.
-Route::get('/videos', function () {
-    return new VideoCollection(Video::all());
-})->middleware('auth:sanctum');
+Route::middleware(['auth:sanctum'])->group(function () {
+    //Visualitzar tots els videos.
+    Route::get('/videos', function () {
+        return new VideoCollection(Video::all());
+    });
 
-//Visualitzar videos per id
-Route::get('/videos/{id}', function ($id) {
-    return new VideoResource(Video::find($id));
+    //Visualitzar videos per id
+    Route::get('/videos/{id}', function ($id) {
+        return new VideoResource(Video::find($id));
+    });
+
+    //Buscar videos pel titol
+    Route::get('/video/{titol}', [VideoController::class, 'title']);
+
+    //Buscar videos tipo Serie
+    Route::get('/series', [VideoController::class, 'serie']);
+
+    //Buscar videos tipo movie
+    Route::get('/movies', [VideoController::class, 'movie']);
 });
 
-//Afegir videos
-Route::post('/video', [VideoController::class, 'store']);
-//Eliminar videos
-Route::delete('/video/delete/{id}', [VideoController::class, 'delete']);
-//Modificar videos
-Route::put('/video/{id}', [VideoController::class, 'update']);
+
+
+//Middleware Admin
+Route::group(['middleware' => ['auth:sanctum', 'isAdmin']], function() {
+//Route::middleware(['auth:sanctum', 'isAdmin'])->group(function () {
+    //Afegir videos
+    Route::post('/video', [VideoController::class, 'store']);
+    //Eliminar videos
+    Route::delete('/video/delete/{id}', [VideoController::class, 'delete']);
+    //Modificar videos
+    Route::put('/video/{id}', [VideoController::class, 'update']);
+      
+});
+
 
 //NO FUNCIONA
 //Buscar videos per genere
-Route::get('/videos/genere/{idGenere}',[VideoController::class, 'genere']);
+Route::get('/genere/{idGenere}', [VideoController::class, 'genere']);
 
-//Buscar videos pel titol
-Route::get('/video/{titol}',[VideoController::class, 'title']);
-
-
-//Buscar videos tipo Serie
-Route::get('/series',[VideoController::class, 'serie']);
-
-//Buscar videos tipo movie
-Route::get('/movies',[VideoController::class, 'movie']);
 
 
 // ======== USUARIOS ========
