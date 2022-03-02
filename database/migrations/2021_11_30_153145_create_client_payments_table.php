@@ -19,7 +19,7 @@ class CreateClientPaymentsTable extends Migration
             $table->unsignedBigInteger('idPayment');
             $table->foreign('idPayment')->references('id')->on('payments');
             $table->unsignedBigInteger('idUserCP');
-            $table->foreign('idUserCP')->references('id')->on('users');
+            $table->foreign('idUserCP')->references('id')->on('users')->onDelete('CASCADE');
         });
     }
 

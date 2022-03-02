@@ -1,13 +1,15 @@
 <?php
 
 use App\Http\Controllers\VideoController;
+use App\Http\Controllers\UserController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Resources\VideoCollection;
+use App\Http\Resources\UserCollection;
 use App\Http\Resources\VideoResource;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Models\Video;
-use App\Models\VideosGenere;
+use App\Models\User;
 
 
 /*
@@ -46,26 +48,36 @@ Route::middleware(['auth:sanctum'])->group(function () {
 
     //Buscar videos tipo movie
     Route::get('/movies', [VideoController::class, 'movie']);
+
 });
 
 
 
 //Middleware Admin
-Route::group(['middleware' => ['auth:sanctum', 'isAdmin']], function() {
-//Route::middleware(['auth:sanctum', 'isAdmin'])->group(function () {
+Route::group(['middleware' => ['auth:sanctum', 'isAdmin']], function () {
+    //Route::middleware(['auth:sanctum', 'isAdmin'])->group(function () {
     //Afegir videos
     Route::post('/video', [VideoController::class, 'store']);
     //Eliminar videos
     Route::delete('/video/delete/{id}', [VideoController::class, 'delete']);
     //Modificar videos
     Route::put('/video/{id}', [VideoController::class, 'update']);
-      
+
+    //USUARIS
+    //Visualitzar tots els usuaris
+    Route::get('/users', function () {
+        return new UserCollection(User::all());
+    });
+    ///Eliminar User
+    Route::delete('/user/delete/{id}', [UserController::class, 'delete']);
+    
+
 });
 
 
 //NO FUNCIONA
 //Buscar videos per genere
-Route::get('/genere/{idGenere}', [VideoController::class, 'genere']);
+Route::get('/genere/{genere}', [VideoController::class, 'genere']);
 
 
 
@@ -73,5 +85,4 @@ Route::get('/genere/{idGenere}', [VideoController::class, 'genere']);
 
 Route::post('login', [LoginController::class, 'doLoginAPI']);
 
-
-// ======== ADMIN ========
+Route::post('signin', [UserController::class, 'signup']);

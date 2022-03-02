@@ -19,7 +19,7 @@ class CreateHistoriesTable extends Migration
             $table->unsignedBigInteger('idVideoH');
             $table->foreign('idVideoH')->references('id')->on('videos');
             $table->unsignedBigInteger('idUserH');
-            $table->foreign('idUserH')->references('id')->on('users');
+            $table->foreign('idUserH')->references('id')->on('users')->onDelete('CASCADE');
         });
     }
 

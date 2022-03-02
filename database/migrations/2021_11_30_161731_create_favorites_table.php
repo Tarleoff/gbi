@@ -19,7 +19,7 @@ class CreateFavoritesTable extends Migration
             $table->unsignedBigInteger('idVideoF');
             $table->foreign('idVideoF')->references('id')->on('videos');
             $table->unsignedBigInteger('idUserF');
-            $table->foreign('idUserF')->references('id')->on('users');
+            $table->foreign('idUserF')->references('id')->on('users')->onDelete('CASCADE');
         });
     }
 
