@@ -9,13 +9,19 @@ type Video {
   episode: Int
   season: Int
   imageFilm: String
-
+  genere: Genere
+}
+type Genere {
+  idGenere: ID!
+  genere: String!
 }
 
-type Query {
+extend type Query {
   video(id: ID! @eq): Video @find
   videos: [Video!]! @all
 }
-type Mutation {
-  createVideo(name: String!, desc: String!, price: String!): Video @create
+extend type Mutation {
+  createVideo(title: String!, sinopsis: String!, duration: Int!): Video @create
+  updateVideo(id: ID, title:String, sinopsis: String, duration: Int): Video @update
+  deleteVideo(id: ID!): Video @delete
 }

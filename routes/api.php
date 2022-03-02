@@ -48,7 +48,6 @@ Route::middleware(['auth:sanctum'])->group(function () {
 
     //Buscar videos tipo movie
     Route::get('/movies', [VideoController::class, 'movie']);
-
 });
 
 
@@ -70,8 +69,9 @@ Route::group(['middleware' => ['auth:sanctum', 'isAdmin']], function () {
     });
     ///Eliminar User
     Route::delete('/user/delete/{id}', [UserController::class, 'delete']);
-    
 
+    //Modificar videos
+    Route::put('/user/{id}', [UserController::class, 'update']);
 });
 
 
