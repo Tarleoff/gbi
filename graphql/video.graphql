@@ -2,6 +2,7 @@
 type Video {
   id: ID!
   title: String!
+  creationDate: String!
   sinopsis: String
   duration: Int
   file: String
@@ -19,9 +20,18 @@ type Genere {
 extend type Query {
   video(id: ID! @eq): Video @find
   videos: [Video!]! @all
+  #Video per titol
+  videoByTitle(title: String! @scope(name: "byTitle")) : [Video!] @all
+  #Video per serie o peli
+  videoTipo(tipo: String! @scope(name: "byTipo")): [Video!] @all
+
+  # #video per genere
+  videoGenere(idGenere: ID! @scope(name: "byGenere")): [Video!] @all
+  
 }
 extend type Mutation {
-  createVideo(title: String!, sinopsis: String!, duration: Int!): Video @create
+  createVideo(title: String!, creationDate: String! , sinopsis: String!, duration: Int!, file: String!,
+  tipo: String!, episode: Int!, season: Int!, imageFilm: String!): Video @create
   updateVideo(id: ID, title:String, sinopsis: String, duration: Int): Video @update
   deleteVideo(id: ID!): Video @delete
 }
