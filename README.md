@@ -128,3 +128,9 @@ cd example-app
 ## 16. (admin) Crear admin de usuario
 ## 17. (admin) Crear la pagina de lista de peliculas/series
 ## 18. (admin) Crear admin de peliculas/series
+
+
+
+## API REST
+
+## GRAPHQL
